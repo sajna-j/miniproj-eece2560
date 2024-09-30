@@ -44,6 +44,15 @@ don't work off of  `main`- make a new branch
     - Enter a message to describe your changes & hit commit 
     ![alt text](image-6.png)
 
+    - PUSH! (This will make your changes visible on the GitHub website- still only on your branch) two options:
+
+        1. hover over the top right corner of the Source Control Graph section & hit the button arrows upwards (Push)
+        ![alt text](image-7.png)
+
+        OR
+
+        2. in a terminal from the `miniproj-eece2560` directory, run `git push`
+
 
 
 1. turn your branch into a Draft PR so that you can see your commit history 
