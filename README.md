@@ -30,32 +30,46 @@ don't work off of  `main`- make a new branch
 -
 
 **Making commits**
-
-1. through ur terminal & VSCode
     
-    - do this while on your branch (run `git branch` to check), it should also say in the bottom left corner of your VSCode window
+1. do this while on your branch (run `git branch` to check), it should also say in the bottom left corner of your VSCode window
     
-    - check all your changed files in VSCode under the Source Control tab
+2. check all your changed files in VSCode under the Source Control tab
     ![alt text](image-4.png)
 
-    - Stage what files you want others to see by hitting the `+` button & the file(s) should moved to a "Staged Changes" section
+3. Stage what files you want others to see by hitting the `+` button & the file(s) should moved to a "Staged Changes" section
     ![alt text](image-5.png)
 
-    - Enter a message to describe your changes & hit commit 
+4. Enter a message to describe your changes & hit commit 
     ![alt text](image-6.png)
 
-    - PUSH! (This will make your changes visible on the GitHub website- still only on your branch) two options:
+5. PUSH! (This will make your changes visible on the GitHub website- still only on your branch) two options:
 
-        1. hover over the top right corner of the Source Control Graph section & hit the button arrows upwards (Push)
+    - hover over the top right corner of the Source Control Graph section & hit the button arrows upwards (Push)
         ![alt text](image-7.png)
 
         OR
 
-        2. in a terminal from the `miniproj-eece2560` directory, run `git push`
+    - in a terminal from the `miniproj-eece2560` directory, run `git push`
 
 
 
-1. turn your branch into a Draft PR so that you can see your commit history 
+**turn your branch into a Draft PR so that you can see your commit history**
 
-    Click `contribute`
-    ![alt text](image-3.png)
+1. Click either `Contribute` > `Open pull request` or if you see your branch in this yellow dialog appear, hit `Compare & pull request`
+    ![alt text](image-9.png)
+
+2. Turn the pull request into a Draft Pull Request with the green button
+    ![alt text](image-11.png)
+
+3. keep making changes and commits+pushes until you are done. it should look something like:
+![alt text](image-12.png)
+
+4. when you're done, hit the `Ready for review` button in the previous pic
+
+5. You can (optionally, but recommended) request others on the team to review the PR before it goes into `main`
+![alt text](image-13.png)
+
+6. Once the reviewers have approved, you can Merge PR with the big green button
+![alt text](image-14.png)
+
+
