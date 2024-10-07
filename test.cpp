@@ -57,6 +57,80 @@ public:
         }
     }
 
+    void bookSeat(SingleLinkedSeatingList &selectionList){
+        int userSeatInput;
+        cout << "Please enter a seat number to book: ";
+        cin >> userSeatInput;
+
+        // Traverse and Iterate over the linked list until you reach the node the user wants to remove
+        Node* currBookedNode = selectionList.head;
+        int indexCount = 0;
+        while(currBookedNode->next != nullptr && currBookedNode->data != userSeatInput){
+            indexCount++;
+            // Since Linked Lists have no index keep count
+            currBookedNode =  currBookedNode->next;
+        }
+
+        if(userSeatInput == currBookedNode->data){
+            insertAtEnd(userSeatInput);
+            cout << "Seat " << userSeatInput << "has been booked" << endl;
+            toPrint();
+            selectionList.deleteNodeAtPosition(indexCount);
+            cout << endl;
+            return;
+
+        }
+        else{
+            cout << "Sorry the seat you entered was can't be booked" << endl;
+            toPrint();
+            cout<<endl;
+            return;
+        }
+
+    }
+
+    void cancelASeat(SingleLinkedSeatingList &selectionList){
+        int userSeatInput;
+        cout << "Please enter a seat number to cancel: ";
+        cin >> userSeatInput;
+
+        if(head == NULL){
+            cout << "You can't cancel the seated. ERROR No Seats Booked";
+            return;
+        }
+
+        Node* currBookedNode = head;
+        int indexCount = 0;
+
+        while(currBookedNode->next != nullptr && currBookedNode->data != userSeatInput){
+            indexCount++;
+            // Since Linked Lists have no index keep count
+            currBookedNode = currBookedNode->next;
+        }
+
+
+        cout << "test" << currBookedNode->data<<  endl;
+
+        if(currBookedNode->data == userSeatInput){
+            Node* currNewAviableNode = selectionList.head;
+            int indexCountAval = 0;
+
+            deleteNodeAtPosition(indexCount);
+            while(currNewAviableNode->next != nullptr && userSeatInput > currNewAviableNode->data){
+                // Since Linked Lists have no index keep count
+                currNewAviableNode =  currNewAviableNode->next;
+                indexCountAval++;
+            }
+
+            selectionList.addNodeAtPosition(indexCountAval, userSeatInput);
+        }
+        else{
+            cout << "Sorry this seat cannot be cancelled" <<endl;
+        }
+
+    }
+
+
     void deleteAtBeginning(){
         if(head == NULL){
             cout<<"The list is empty" << endl;
@@ -122,25 +196,44 @@ public:
 
     }
 
-    // to insert a new node in the linked list at the headTop of the single linked list
-    void reverseSingleLinkedList(){
+    // to add node at a given position
+    void addNodeAtPosition(int positionIndex, int data){
 
-        //create a new node pointer object
-        Node* prevNode = NULL;
-        Node* currentNode = head;
-        Node* nextNode = NULL;
+        Node* newNode = new Node(data);
+        int count = 0;
 
-        while(currentNode != NULL){
-            nextNode = currentNode->next; // To Store the Next Node in the List
-            currentNode->next = prevNode; // Doing the Reverse Operation on the Node by redirecting pointer
-
-            // iterating over the list backwards
-            prevNode = currentNode; // Move the headTop node to the tail node
-            currentNode = nextNode;// Move the next node to the headTop node
+        //Check Empty Case
+        if(head == NULL){
+            cout<<"The list is empty" << endl;
+            return;
         }
 
-        head = prevNode;
+        // insertNode at the head if position 0
+        if(positionIndex == 0){
+            newNode->next = head;
+            head = newNode;
+            return;
+        }
+
+        // Traverse and Iterate over the linked list until you reach the node the user wants to remove
+        Node* curr_Node = head;
+        while(curr_Node->next != nullptr && positionIndex-1 != count){
+
+            // Since Linked Lists have no index keep count
+            count += 1;
+            curr_Node =  curr_Node->next;
+        }
+
+
+        cout << "Add Data:" << newNode->data << ", Address: " << curr_Node->next << endl;
+
+        // reassign the addressing
+        newNode->next = curr_Node->next;
+        curr_Node->next = newNode;
+
+
     }
+
 
 
     void deleteAtEnd(){
@@ -169,7 +262,7 @@ public:
             return;
         }
         while(temp!=NULL){
-            cout<< "Data:" << temp->data << " Address:" << temp->next<< "  |  ";
+            cout<< "Seat:" << temp->data << " Address:" << temp->next<< "  |  ";
 
             //this is how you iterate ove next node in list
             temp = temp->next;
@@ -179,9 +272,20 @@ public:
 
 };
 
+
 void mainMenuCatalog(){
     string userInput;
-    while(true){
+    SingleLinkedSeatingList seatingList;
+    SingleLinkedSeatingList bookedList;
+    int maxSeatInRow = 12;
+
+    for(int i = 0; i < maxSeatInRow; i++){
+        seatingList.insertAtEnd(100+i);
+    }
+    seatingList.toPrint();
+
+
+    while(true) {
         cout << "Event Ticket Booking System: MAIN MENU";
         cout << endl;
         cout << "Please Select an Option: "<< endl;
@@ -197,21 +301,24 @@ void mainMenuCatalog(){
         if(userInput == "1"){
             cout << endl;
             cout << "You selected to Book a Seat" << endl;
+            bookedList.bookSeat(seatingList);
             cout << endl;
         }
         else if(userInput == "2"){
             cout << endl;
             cout << "You selected to Cancel a Seat" << endl;
+            bookedList.cancelASeat(seatingList);
             cout << endl;
         }
         else if(userInput == "3"){
             cout << endl;
-            cout << "You selected Display Available Seats. Please reselect you input" << endl;
+            cout << "You selected Display Available Seats." << endl;
+            seatingList.toPrint();
             cout << endl;
         }
         else if(userInput == "4"){
             cout << endl;
-            cout << "You selected an invalid option. Please reselect you input" << endl;
+            cout << "You selected to terminate the program. Please reselect you input" << endl;
             cout << endl;
             break;
         }
@@ -222,9 +329,10 @@ void mainMenuCatalog(){
         }
 
     }
-}
+};
 
 
 int main() {
     mainMenuCatalog();
 }
+
