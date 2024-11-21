@@ -107,7 +107,9 @@ public:
             cout << "Seat " << userSeatInput << " has been added to the BOOKED LIST" << endl;
             toPrint();
 
+            cout << endl;
             // delete the booked seat from the available list as it is not available no more
+            cout << "Delete Seat: " << userSeatInput << " from the AVAILABLE LIST" << endl;
             availableSeatList.deleteNodeAtPosition(indexCount);
             cout << endl;
 
@@ -137,7 +139,7 @@ public:
         if(head == NULL){
 
             // if it is true then throw an error.
-            cout << "You can't cancel the seated. ERROR No Seats Booked";
+            cout << "You can't cancel the seat. ERROR No Seats in Booked List to cancel";
             return;
         }
 
@@ -165,6 +167,9 @@ public:
             int indexCountAval = 0;
 
             // remove the cancelled seat from the booked list
+            cout << "Seat " << userSeatInput << " has been cancelled" <<endl;
+            cout << endl;
+            cout << "Delete Seat: " << userSeatInput << " from the BOOKED LIST" <<endl;
             deleteNodeAtPosition(indexCount);
 
             // to iterate over the available seat list to check
@@ -177,6 +182,8 @@ public:
             }
 
             // add the removed booked seat into the available seat list
+            cout << endl;
+            cout << "Add Seat: " << userSeatInput << " to the AVAILABLE LIST" <<endl;
             availableSeatList.addNodeAtPosition(indexCountAval, userSeatInput);
         }
         else{
@@ -220,7 +227,7 @@ public:
         // to get the node you want to remove
         SeatNode *tempNode = curr_Node->next;
 
-        cout << "Deleting Seat:" << tempNode->data << ", Address: " << curr_Node->next << endl;
+        cout << "Deleting Seat: " << tempNode->data << ", Address: " << curr_Node->next << endl;
 
         // reassign the addressing
         curr_Node->next = tempNode->next;
@@ -286,7 +293,7 @@ public:
 
         // check to see if there are no elements in the list
         if(head==NULL){
-            cout << "There is no items";
+            cout << "There is no seats in list" << endl;
             return;
         }
 
@@ -329,11 +336,11 @@ void mainMenuCatalog(){
         cout << "Please Select an Option: "<< endl;
         cout << "1. Book a Seat" << endl;
         cout << "2. Cancel a Seat" << endl;
-        cout << "3. Show Available Seats" << endl;
+        cout << "3. Show Available Seats (All Booked Seats List)" << endl;
         cout << "4. Exit" << endl;
-        cout << "5. Show Booked Seats" << endl;
+        cout << "5. Show All Open Seats" << endl;
 
-        cout << "Insertion Selection Number: ";
+        cout << "Insert Operation Number: ";
         cin >> userInput;
         cout << endl;
 
@@ -352,8 +359,8 @@ void mainMenuCatalog(){
         }
         else if(userInput == "3"){
             cout << endl;
-            cout << "You selected Display Available Seats." << endl;
-            avalSeatingList.toPrint();
+            cout << "You selected Display Available Seats. (Booked Seats)" << endl;
+            bookedSeatingList.toPrint();
             cout << endl;
         }
         else if(userInput == "4"){
@@ -364,8 +371,8 @@ void mainMenuCatalog(){
         }
         else if(userInput == "5"){
             cout << endl;
-            cout << "You selected Display Booked Seats." << endl;
-            bookedSeatingList.toPrint();
+            cout << "You selected Display All Open Seats" << endl;
+            avalSeatingList.toPrint();
             cout << endl;
         }
         else{
@@ -381,4 +388,3 @@ void mainMenuCatalog(){
 int main() {
     mainMenuCatalog();
 }
-

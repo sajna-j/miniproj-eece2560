@@ -1,5 +1,7 @@
 GIT:
 
+Thank you Jasmine for creating this :)
+
 don't work off of  `main`- make a new branch 
 
 **Two ways to make a new branch off of main**
